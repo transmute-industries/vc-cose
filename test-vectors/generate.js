@@ -38,7 +38,7 @@ const privateKeyJwk = {
   const signature = await cose.sign.create(headers, payload, signer);
   const verified = await cose.sign.verify(signature, verifier, {});
   const protectedCredential = JSON.parse(new TextDecoder().decode(Buffer.from(verified)))
-  // console.log(protectedCredential);
+  console.log(protectedCredential);
   fs.writeFileSync('../verifiable-credential.cose.base64url', jose.base64url.encode(signature));
 
 })()
