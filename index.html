@@ -171,6 +171,20 @@
 
       <li>
         <p>
+          <a data-cite="RFC9052#section-3.1">alg</a> MUST be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST match the <a data-cite="RFC9052#name-cose-key-common-parameters">alg</a> in the dereferenced <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a data-cite="RFC9052#section-3.1">content type (ctyp)</a> MUST be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST be <code>application/credential+json</code>.
+        </p>
+      </li>
+
+      <li>
+        <p>
           The <a data-cite="RFC9052#name-basic-cose-structure">content</a> MUST be a sequence of octets representing the UTF-8 JSON
           encoding
           of the <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a>.
