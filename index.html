@@ -118,11 +118,11 @@
   <section>
     <h2>Producing</h2>
 
-    <p>This specification uses normal approaches to the production and consumption of a COSE_Sign.  For additional
+    <p>This specification uses normal approaches to the production and consumption of a COSE_Sign1.  For additional
     details, please see the full breakdown of the process in <a data-cite="RFC9052#name-signing-objects">Signing Objects</a>.</p>
     
-    <p>Specifically related to use of COSE_Sign with VCs the following normative requirements MUST 
-    be considered in production of a COSE_Sign object.</p>
+    <p>Specifically related to use of COSE_Sign1 with VCs the following normative requirements MUST 
+    be considered in production of a COSE_Sign1 object.</p>
 
     <ul>
       <li>
@@ -182,14 +182,14 @@
 
   <section>
     <h2>Consuming</h2>
-    <p>This specification uses normal approaches to the consumption of a COSE_Sign.  For additional
+    <p>This specification uses normal approaches to the consumption of a COSE_Sign1.  For additional
     details, please see the full breakdown of the process in <a data-cite="RFC9052#section-5">Signing Objects</a>.</p>
     
     <p>As a part of ensuring interoperability with VCs secured in the manner described in this specification, 
     resolution of public key material must be considered, as a verifier may not have access to the public key.</p>
     
     <p>
-      In order to verify a <a data-cite="VC-DATA-MODEL#credentials">Verifiable Credential</a> using a COSE_Sign proof,
+      In order to verify a <a data-cite="VC-DATA-MODEL#credentials">Verifiable Credential</a> using a COSE_Sign1 proof,
       the public key associated with the signature needs to be obtained. 
       If the verifier does not already have the public key, it can be obtained through the following process:
     </p>
