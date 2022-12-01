@@ -26,20 +26,16 @@
       shortName: "vc-cose",
       // group: "vc",
       localBiblio: {
-        // OAS: {
-        //   title: "OpenAPI Specification",
-        //   href: "https://swagger.io/specification/",
-        //   authors: [
-        //     "Darrel Miller",
-        //     "Jeremy Whitlock",
-        //     "Marsh Gardiner ",
-        //     "Mike Ralphson",
-        //     "Ron Ratovsky",
-        //     "Uri Sarid",
-        //   ],
-        //   status: "unofficial",
-        //   publisher: "OpenAPI Initiative",
-        // },
+        CWT_HEADER: {
+          title: "CBOR Web Token (CWT) Claims in COSE Headers",
+          href: "https://datatracker.ietf.org/doc/html/draft-ietf-cose-cwt-claims-in-headers-01",
+          authors: [
+            "T. Looker",
+            "M. Jones",
+          ],
+          status: "Internet-Draft",
+          publisher: "IETF",
+        },
       },
       xref: {
         specs: ["DID-CORE", "VC-DATA-MODEL", "JSON-LD"],
@@ -156,7 +152,7 @@
               If <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> is a <a data-cite="DID-CORE#relative-did-urls">relative
                 DID URL</a> in the
               <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, then
-              <a data-cite="RFC9052#name-common-cose-header-paramete">iss</a> MUST be present in the
+              <a data-cite="CWT_HEADER#section-3">iss</a> MUST be present in the
               <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>.
             </p>
           </li>
@@ -166,6 +162,16 @@
             </p>
           </li>
         </ul>
+        </p>
+      </li>
+
+
+      
+
+      <li>
+        <p>
+          <a data-cite="CWT_HEADER#section-3">iss</a> MAY be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST match the <a data-cite="DID-CORE#verification-methods">controller</a> of the dereferenced <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a>.
         </p>
       </li>
 
@@ -213,7 +219,7 @@
       </li>
       <li>
         Construct an <a data-cite="DID-CORE#did-url-syntax">absolute DID URL</a> 
-        from the <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> and <a data-cite="RFC9052#name-common-cose-header-paramete">iss</a> if iss is present.
+        from the <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> and <a data-cite="CWT_HEADER#section-3">iss</a> if present.
       </li>
       <li>
         <a data-cite="DID-CORE#did-url-dereferencing">Dereferences</a> the <a data-cite="DID-CORE#did-url-syntax">absolute DID URL</a> 
