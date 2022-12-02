@@ -1,5 +1,7 @@
 ### Verifiable Credentials with CBOR Object Signatures
 
+[![pages-build-deployment](https://github.com/transmute-industries/vc-cose/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/transmute-industries/vc-cose/actions/workflows/pages/pages-build-deployment)
+
 - [Editors Draft](https://transmute-industries.github.io/vc-cose/)
 
 ### Discussion Forums
