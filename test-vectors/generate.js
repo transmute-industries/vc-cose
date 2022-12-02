@@ -63,4 +63,6 @@ const privateKeyJwk = {
   }
   fs.writeFileSync('../verifiable-credential.cose.json', JSON.stringify(example, null, 2));
 
+  fs.writeFileSync('../verifiable-credential.cose', signature);
+
 })()
