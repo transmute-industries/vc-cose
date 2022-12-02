@@ -18,8 +18,9 @@ const privateKeyJwk = {
 
 (async ()=>{
 
+  const protectedHeader = { kid: credential.issuer + '#key-0', alg: 'ES256', ctyp: 'application/credential+json' }
   const headers = {
-    p: { kid: credential.issuer + '#key-0', alg: 'ES256', ctyp: 'application/credential+json' },
+    p: protectedHeader,
   };
 
   const signer = {
@@ -39,6 +40,29 @@ const privateKeyJwk = {
   const verified = await cose.sign.verify(signature, verifier, {});
   const protectedCredential = JSON.parse(new TextDecoder().decode(Buffer.from(verified)))
   console.log(protectedCredential);
-  fs.writeFileSync('../verifiable-credential.cose.base64url', jose.base64url.encode(signature));
+
+
+  const example = {
+    "title":"ECDSA-sig-xxxxxxxxxx: ECDSA - P-ES256 - sign1",
+    "input":{
+       "plaintext": JSON.stringify(credential),
+       "sign0":{
+          "key": privateKeyJwk,
+          "protected": protectedHeader,
+          "alg": privateKeyJwk.alg
+       },
+       "rng_description":"seed for signature"
+    },
+    "intermediates":{
+       "ToBeSign_hex": Buffer.from(payload).toString('hex')
+    },
+    "output":{
+       "cbor_diag": null,
+       "cbor": Buffer.from(signature).toString('hex')
+    }
+  }
+  fs.writeFileSync('../verifiable-credential.cose.json', JSON.stringify(example, null, 2));
+
+  fs.writeFileSync('../verifiable-credential.cose', signature);
 
 })()

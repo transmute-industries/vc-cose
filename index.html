@@ -26,20 +26,16 @@
       shortName: "vc-cose",
       // group: "vc",
       localBiblio: {
-        // OAS: {
-        //   title: "OpenAPI Specification",
-        //   href: "https://swagger.io/specification/",
-        //   authors: [
-        //     "Darrel Miller",
-        //     "Jeremy Whitlock",
-        //     "Marsh Gardiner ",
-        //     "Mike Ralphson",
-        //     "Ron Ratovsky",
-        //     "Uri Sarid",
-        //   ],
-        //   status: "unofficial",
-        //   publisher: "OpenAPI Initiative",
-        // },
+        CWT_HEADER: {
+          title: "CBOR Web Token (CWT) Claims in COSE Headers",
+          href: "https://datatracker.ietf.org/doc/html/draft-ietf-cose-cwt-claims-in-headers-01",
+          authors: [
+            "T. Looker",
+            "M. Jones",
+          ],
+          status: "Internet-Draft",
+          publisher: "IETF",
+        },
       },
       xref: {
         specs: ["DID-CORE", "VC-DATA-MODEL", "JSON-LD"],
@@ -118,17 +114,17 @@
   <section>
     <h2>Producing</h2>
 
-    <p>This specification uses normal approaches to the production and consumption of a COSE_Sign.  For additional
+    <p>This specification uses normal approaches to the production and consumption of a COSE_Sign1.  For additional
     details, please see the full breakdown of the process in <a data-cite="RFC9052#name-signing-objects">Signing Objects</a>.</p>
     
-    <p>Specifically related to use of COSE_Sign with VCs the following normative requirements MUST 
-    be considered in production of a COSE_Sign object.</p>
+    <p>Specifically related to use of COSE_Sign1 with VCs the following normative requirements MUST 
+    be considered in production of a COSE_Sign1 object.</p>
 
     <ul>
       <li>
         <p>
           <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> MUST be present in the
-          <a data-cite="RFC9052#name-common-cose-header-paramete">JOSE Header</a>.
+          <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>.
         </p>
         <p>
           The value of <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> MUST be
@@ -155,17 +151,41 @@
             <p>
               If <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> is a <a data-cite="DID-CORE#relative-did-urls">relative
                 DID URL</a> in the
-              <a data-cite="RFC9052#name-common-cose-header-paramete">JOSE Header</a>, then
-              <a data-cite="RFC9052#name-common-cose-header-paramete">iss</a> MUST be present in the
-              <a data-cite="RFC9052#name-common-cose-header-paramete">JOSE Header</a>.
+              <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, then
+              <a data-cite="CWT_HEADER#section-3">iss</a> MUST be present in the
+              <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>.
             </p>
           </li>
           <li>
             <p>
-              The <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a> is expected to verify the JWS.
+              The <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a> is expected to verify the COSE_Sign1.
             </p>
           </li>
         </ul>
+        </p>
+      </li>
+
+
+      
+
+      <li>
+        <p>
+          <a data-cite="CWT_HEADER#section-3">iss</a> MAY be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST match the <a data-cite="DID-CORE#verification-methods">controller</a> of the dereferenced <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a data-cite="RFC9052#section-3.1">alg</a> MUST be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST match the <a data-cite="RFC9052#name-cose-key-common-parameters">alg</a> in the dereferenced <a data-cite="DID-CORE#dfn-publickeyjwk">publicKeyJwk</a>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a data-cite="RFC9052#section-3.1">content type (ctyp)</a> MUST be present in <a data-cite="RFC9052#name-common-cose-header-paramete">COSE Headers</a>, 
+          and MUST be <code>application/credential+json</code>.
         </p>
       </li>
 
@@ -182,14 +202,14 @@
 
   <section>
     <h2>Consuming</h2>
-    <p>This specification uses normal approaches to the consumption of a COSE_Sign.  For additional
+    <p>This specification uses normal approaches to the consumption of a COSE_Sign1.  For additional
     details, please see the full breakdown of the process in <a data-cite="RFC9052#section-5">Signing Objects</a>.</p>
     
     <p>As a part of ensuring interoperability with VCs secured in the manner described in this specification, 
     resolution of public key material must be considered, as a verifier may not have access to the public key.</p>
     
     <p>
-      In order to verify a <a data-cite="VC-DATA-MODEL#credentials">Verifiable Credential</a> using a COSE_Sign proof,
+      In order to verify a <a data-cite="VC-DATA-MODEL#credentials">Verifiable Credential</a> using a COSE_Sign1 proof,
       the public key associated with the signature needs to be obtained. 
       If the verifier does not already have the public key, it can be obtained through the following process:
     </p>
@@ -199,7 +219,7 @@
       </li>
       <li>
         Construct an <a data-cite="DID-CORE#did-url-syntax">absolute DID URL</a> 
-        from the <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> and <a data-cite="RFC9052#name-common-cose-header-paramete">iss</a> if iss is present.
+        from the <a data-cite="RFC9052#name-common-cose-header-paramete">kid</a> and <a data-cite="CWT_HEADER#section-3">iss</a> if present.
       </li>
       <li>
         <a data-cite="DID-CORE#did-url-dereferencing">Dereferences</a> the <a data-cite="DID-CORE#did-url-syntax">absolute DID URL</a> 
@@ -225,8 +245,8 @@
       class="example"
       title="A verifiable credential for a University Degree with an external proof"
     >
-      <p>This verifiable credential is base64url encoded cose signature.</p>
-      <pre data-include="./verifiable-credential.cose.base64url" data-include-format="text"></pre>
+      <p>This verifiable credential is represented in test vector format used by COSE WG</p>
+      <pre data-include="./verifiable-credential.cose.json" data-include-format="json"></pre>
     </aside>
   </section>
 
