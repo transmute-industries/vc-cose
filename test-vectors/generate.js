@@ -18,7 +18,7 @@ const privateKeyJwk = {
 
 (async ()=>{
 
-  const protectedHeader = { kid: credential.issuer + '#key-0', alg: 'ES256', ctyp: 'application/credential+json' }
+  const protectedHeader = { kid: credential.issuer + '#key-0', alg: 'ES256', ctyp: 'application/credential+ld+json' }
   const headers = {
     p: protectedHeader,
   };
